@@ -9,8 +9,10 @@
 	],
 	"contact": {
 		"sources": "https://github.com/boarbox/randomizer-plus-plus",
-		"issues": "https://github.com/boarbox/randomizer-plus-plus/issues"
+		"issues": "https://github.com/boarbox/randomizer-plus-plus/issues",
+		"homepage": "https://modrinth.com/mod/randomizer-plus-plus"
 	},
+	"icon": "assets/randomizer_plus_plus/icon.png",
 	"license": "GNU-GPLv3",
 	"environment": "*",
 	"entrypoints": {
