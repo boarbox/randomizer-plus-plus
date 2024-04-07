@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import science.boarbox.randomizer_plus_plus.RandomizerPlusPlus;
 import science.boarbox.randomizer_plus_plus.loot.LootRandomizer;
 import science.boarbox.randomizer_plus_plus.resource.ResourcePackUtil;
+import science.boarbox.randomizer_plus_plus.util.JsonUtil;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -24,7 +25,9 @@ public abstract class WorldCreateMixin {
 
         RandomizerPlusPlus.LOGGER.info("Generating seed");
         try {
-            LootRandomizer.randomizeLootTables("minecraft", "blocks", new HashSet<>(),random);
+            JsonUtil.saveToFile(server.getSavePath(WorldSavePath.ROOT), "spoilers.json",
+                    LootRandomizer.randomizeLootTables("minecraft", "blocks", new HashSet<>(),random)
+            );
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

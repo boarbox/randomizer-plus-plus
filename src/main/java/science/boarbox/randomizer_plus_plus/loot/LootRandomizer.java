@@ -1,5 +1,6 @@
 package science.boarbox.randomizer_plus_plus.loot;
 
+import com.google.gson.JsonElement;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.Identifier;
 import science.boarbox.randomizer_plus_plus.RandomizerPlusPlus;
@@ -13,7 +14,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class LootRandomizer {
-    public static void randomizeLootTables(String namespace, String prefix, Set<Identifier> blacklist, Random random) throws IOException {
+    public static JsonElement randomizeLootTables(String namespace, String prefix, Set<Identifier> blacklist, Random random) throws IOException {
         Map<Identifier, LootTable> lootTableMap = LootUtil.getLootTableMapWithExclusions(namespace, prefix, blacklist);
 
         List<Identifier> unshuffledList = lootTableMap.keySet().stream().toList();
@@ -22,5 +23,6 @@ public class LootRandomizer {
             RandomizerPlusPlus.RESOURCE_PACK.addLootTable(
                     IdentifierUtil.omit(unshuffledList.get(i), "loot_tables/", ".json"), lootTableMap.get(shuffledList.get(i)));
         }
+        return RandomizerUtil.generateSpoilerJson(unshuffledList, shuffledList);
     }
 }
