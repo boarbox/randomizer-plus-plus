@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "randomizer_plus_plus",
+	"version": "${version}",
+	"name": "Randomizer++",
+	"description": "A randomizer mod for minecraft",
+	"authors": [
+		"Boarbox"
+	],
+	"contact": {
+		"sources": "https://github.com/boarbox/randomizer-plus-plus",
+		"issues": "https://github.com/boarbox/randomizer-plus-plus/issues"
+	},
+	"license": "GNU-GPLv3",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"science.boarbox.randomizer_plus_plus.RandomizerPlusPlus"
+		],
+		"fabric-datagen": [
+			"science.boarbox.randomizer_plus_plus.RandomizerPlusPlus"
+		]
+	},
+	"mixins": [
+		"randomizer_plus_plus.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.1",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*",
+		"brrp_v1": ">=1"
+	}
+}
