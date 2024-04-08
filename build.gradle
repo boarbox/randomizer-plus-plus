@@ -11,9 +11,9 @@ base {
 }
 
 repositories {
+	maven { url "https://raw.githubusercontent.com/SolidBlock-cn/mvn-repo/main" }
 	maven { url "https://maven.terraformersmc.com/releases/" }
 	maven { url "https://maven.shedaniel.me" }
-	flatDir { dir "${rootDir}/deps" }
 }
 
 fabricApi {
