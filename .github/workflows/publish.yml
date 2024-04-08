@@ -6,6 +6,7 @@ env:
   MINECRAFT_VERSION: 1.20.4
   JAVA_VERSION: 17
   CURSEFORGE_ID: 999697
+  MODRINTH_ID: HRbHTeKz
 
 permissions:
   contents: write
