@@ -1,7 +1,14 @@
 package science.boarbox.randomizer_plus_plus;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.impl.resource.loader.FabricResourcePackProfile;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.resource.ResourcePackManager;
+import net.minecraft.resource.ResourcePackProfile;
+import net.minecraft.resource.ResourcePackProvider;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.resource.metadata.PackResourceMetadata;
+import net.minecraft.resource.metadata.ResourceMetadataMap;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +25,6 @@ public class RandomizerPlusPlus implements ModInitializer {
 
 	private static RuntimeResourcePack createResourcePack() {
 		var pack = RuntimeResourcePack.create(IdentifierUtil.create("seed"));
-
 		// if not enabled, game will crash when loading into a world more than once, this will just overwrite everything that existed already so we don't really have any final duplicates
 		pack.setAllowsDuplicateResource(true);
 
@@ -30,8 +36,7 @@ public class RandomizerPlusPlus implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		RRPEventHelper.BEFORE_USER.registerSidedPack(ResourceType.SERVER_DATA, RESOURCE_PACK);
-
+		RRPEventHelper.AFTER_VANILLA.registerSidedPack(ResourceType.SERVER_DATA, RESOURCE_PACK);
 		EventSubscribers.subscribe();
 		RandomizerPlusPlus.LOGGER.info("Mod initialized successfully!");
 	}
