@@ -1,10 +1,19 @@
 package science.boarbox.randomizer_plus_plus.event;
 
 import com.google.common.collect.Lists;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.integrated.IntegratedServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.SaveProperties;
+import net.minecraft.world.WorldEvents;
 import science.boarbox.randomizer_plus_plus.RandomizerPlusPlus;
 
 import java.util.Collection;
@@ -36,6 +45,18 @@ public final class EventSubscribers {
 
         server.reloadResources(packsToReload);
         RandomizerPlusPlus.LOGGER.info("Enabled seed");
+    }
+
+
+    /**
+     * Client side specific event subscriptions should be registered here
+     */
+    @Environment(EnvType.CLIENT)
+    public static void clientSideSubscribe() {
+        // clears the RRP on leaving a single player world to make sure randomizer datapack doesn't get applied to other worlds
+        ServerLifecycleEvents.SERVER_STOPPED.register((server -> {
+            RandomizerPlusPlus.RESOURCE_PACK.clearResources();
+        }));
     }
 
     /**

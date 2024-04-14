@@ -19,6 +19,9 @@
 		"main": [
 			"science.boarbox.randomizer_plus_plus.RandomizerPlusPlus"
 		],
+		"cardinal-components": [
+			"science.boarbox.randomizer_plus_plus.component.ModComponents"
+		],
 		"fabric-datagen": [
 			"science.boarbox.randomizer_plus_plus.RandomizerPlusPlus"
 		]
@@ -32,5 +35,10 @@
 		"java": ">=17",
 		"fabric-api": "*",
 		"brrp_v1": ">=1"
+	},
+	"custom": {
+		"cardinal-components": [
+			"randomizer_plus_plus:randomizer_settings"
+		]
 	}
 }
