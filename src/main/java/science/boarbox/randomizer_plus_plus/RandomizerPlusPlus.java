@@ -1,14 +1,8 @@
 package science.boarbox.randomizer_plus_plus;
 
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.impl.resource.loader.FabricResourcePackProfile;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.resource.ResourcePackManager;
-import net.minecraft.resource.ResourcePackProfile;
-import net.minecraft.resource.ResourcePackProvider;
 import net.minecraft.resource.ResourceType;
-import net.minecraft.resource.metadata.PackResourceMetadata;
-import net.minecraft.resource.metadata.ResourceMetadataMap;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +11,7 @@ import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import science.boarbox.randomizer_plus_plus.event.EventSubscribers;
 import science.boarbox.randomizer_plus_plus.util.IdentifierUtil;
 
-public class RandomizerPlusPlus implements ModInitializer {
+public class RandomizerPlusPlus implements ModInitializer, ClientModInitializer {
 	public static final String MOD_ID = "randomizer_plus_plus";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
@@ -39,5 +33,10 @@ public class RandomizerPlusPlus implements ModInitializer {
 		RRPEventHelper.AFTER_VANILLA.registerSidedPack(ResourceType.SERVER_DATA, RESOURCE_PACK);
 		EventSubscribers.subscribe();
 		RandomizerPlusPlus.LOGGER.info("Mod initialized successfully!");
+	}
+
+	@Override
+	public void onInitializeClient() {
+		EventSubscribers.clientSideSubscribe();
 	}
 }

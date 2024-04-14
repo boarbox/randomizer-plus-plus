@@ -1,11 +1,14 @@
 {
-	"required": true,
-	"package": "science.boarbox.randomizer_plus_plus.mixin",
-	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-		"WorldCreateMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	}
+  "required": true,
+  "package": "science.boarbox.randomizer_plus_plus.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MixinMinecraftServer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "MixinCreateWorldScreen"
+  ]
 }
