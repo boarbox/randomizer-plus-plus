@@ -59,6 +59,3 @@ jobs:
           # Only include this section if you wish to publish
           # your assets on GitHub.
           github-token: ${{ secrets.GH_TOKEN }}
-
-          github-generate-changelog: true
-          github-draft: true
