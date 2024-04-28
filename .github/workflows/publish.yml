@@ -1,6 +1,10 @@
 name: Publish on GitHub, CurseForge & Modrinth
 
-on: [ pull_request, workflow_dispatch ]
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 
 env:
   MINECRAFT_VERSION: 1.20.4
