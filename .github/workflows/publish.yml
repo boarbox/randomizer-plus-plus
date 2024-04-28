@@ -2,9 +2,8 @@ name: Publish on GitHub, CurseForge & Modrinth
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
+  release:
+    - published
 
 env:
   MINECRAFT_VERSION: 1.20.4
@@ -45,7 +44,6 @@ jobs:
       - name: mc-publish
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          changelog-file: CHANGELOG.md
           # Only include this section if you wish to publish
           # your assets on Modrinth.
           modrinth-id: ${{ env.MODRINTH_ID }}
@@ -59,3 +57,6 @@ jobs:
           # Only include this section if you wish to publish
           # your assets on GitHub.
           github-token: ${{ secrets.GH_TOKEN }}
+
+          github-generate-changelog: true
+          github-draft: true
