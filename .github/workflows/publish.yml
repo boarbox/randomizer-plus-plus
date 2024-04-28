@@ -45,6 +45,7 @@ jobs:
       - name: mc-publish
         uses: Kir-Antipov/mc-publish@v3.3
         with:
+          changelog-file: CHANGELOG.md
           # Only include this section if you wish to publish
           # your assets on Modrinth.
           modrinth-id: ${{ env.MODRINTH_ID }}
