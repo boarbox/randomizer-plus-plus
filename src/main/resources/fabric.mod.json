@@ -40,6 +40,11 @@
 	"custom": {
 		"cardinal-components": [
 			"randomizer_plus_plus:randomizer_settings"
-		]
+		],
+		"mc-publish": {
+			"dependencies": [
+				"brrp_v1@>=1(required){modrinth:brrp}"
+			]
+		}
 	}
 }
