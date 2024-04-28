@@ -8,7 +8,7 @@ import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.client.gui.widget.GridWidget;
 import net.minecraft.client.gui.widget.Positioner;
 import net.minecraft.text.Text;
-import science.boarbox.randomizer_plus_plus.config.RandomizerSettings;
+import science.boarbox.randomizer_plus_plus.generation.RandomizerSettings;
 
 /**
  * GUI for selecting randomizer settings for a new seed

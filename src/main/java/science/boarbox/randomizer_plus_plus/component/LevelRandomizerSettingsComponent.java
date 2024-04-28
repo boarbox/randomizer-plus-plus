@@ -1,10 +1,9 @@
 package science.boarbox.randomizer_plus_plus.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import dev.onyxstudios.cca.api.v3.level.LevelComponents;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.WorldProperties;
-import science.boarbox.randomizer_plus_plus.config.RandomizerSettings;
+import science.boarbox.randomizer_plus_plus.generation.RandomizerSettings;
 
 public class LevelRandomizerSettingsComponent implements RandomizerSettingsComponent, AutoSyncedComponent {
     private final WorldProperties provider;
@@ -14,6 +13,7 @@ public class LevelRandomizerSettingsComponent implements RandomizerSettingsCompo
         this.provider = provider;
     }
 
+    @Override
     public void setSettings(RandomizerSettings settings) {
         this.settings = settings;
     }

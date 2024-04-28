@@ -1,28 +1,31 @@
 package science.boarbox.randomizer_plus_plus.loot;
 
-import com.google.gson.JsonElement;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.Identifier;
 import science.boarbox.randomizer_plus_plus.RandomizerPlusPlus;
+import science.boarbox.randomizer_plus_plus.generation.RandomizerSettings;
 import science.boarbox.randomizer_plus_plus.util.IdentifierUtil;
-import science.boarbox.randomizer_plus_plus.util.RandomizerUtil;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 
 public class LootRandomizer {
-    public static JsonElement randomizeLootTables(String namespace, String prefix, Set<Identifier> blacklist, Random random) throws IOException {
-        Map<Identifier, LootTable> lootTableMap = LootUtil.getLootTableMapWithExclusions(namespace, prefix, blacklist);
-
-        List<Identifier> unshuffledList = lootTableMap.keySet().stream().toList();
-        List<Identifier> shuffledList = RandomizerUtil.createShuffledList(unshuffledList, random);
-        for (int i=0; i<lootTableMap.size(); i++) {
-            RandomizerPlusPlus.RESOURCE_PACK.addLootTable(
-                    IdentifierUtil.omit(unshuffledList.get(i), "loot_tables/", ".json"), lootTableMap.get(shuffledList.get(i)));
+    private static final Map<Identifier, LootTable> BLOCK_LOOT_TABLES;
+    static {
+        try {
+            BLOCK_LOOT_TABLES = LootUtil.getLootTableMap("minecraft", "blocks");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return RandomizerUtil.generateSpoilerJson(unshuffledList, shuffledList);
+    }
+
+    public static void applyBlockRandomization(Identifier from, Identifier to) {
+        RandomizerPlusPlus.RESOURCE_PACK.addLootTable(
+                IdentifierUtil.prefixPath(from, "blocks"), BLOCK_LOOT_TABLES.get(to));
+    }
+
+    public static Collection<Identifier> getBlockOptions(RandomizerSettings settings) {
+        return BLOCK_LOOT_TABLES.keySet();
     }
 }
