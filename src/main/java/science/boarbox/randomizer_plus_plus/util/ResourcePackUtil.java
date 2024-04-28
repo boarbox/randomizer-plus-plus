@@ -1,4 +1,4 @@
-package science.boarbox.randomizer_plus_plus.resource;
+package science.boarbox.randomizer_plus_plus.util;
 
 
 import net.minecraft.resource.InputSupplier;
@@ -15,41 +15,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.zip.ZipOutputStream;
 
 public final class ResourcePackUtil {
-    public static Map<Identifier, InputSupplier<InputStream>> getWhitelistedResourceSuppliersMap(
-            ResourceType resourceType,
-            @NotNull Set<Identifier> whitelist
-    ) {
-        var resourcePack =  VanillaDataPackProvider.createDefaultPack();
-        Map<Identifier, InputSupplier<InputStream>> result = new HashMap<>();
-
-        for (Identifier identifier : whitelist) {
-            result.put(
-                    identifier,
-                    resourcePack.open(resourceType, identifier)
-            );
-        }
-
-        resourcePack.close();
-        return result;
-    }
-
-    public static Map<Identifier, InputSupplier<InputStream>> getUnexcludedResourceSuppliersMap(
+    public static @NotNull Map<Identifier, InputSupplier<InputStream>> getUnexcludedResourceSuppliersMap(
             ResourceType resourceType,
             @NotNull String namespace,
-            @NotNull String prefix,
-            @NotNull Set<Identifier> blacklist
+            @NotNull String prefix
     ) {
         var resourcePack =  VanillaDataPackProvider.createDefaultPack();
         Map<Identifier, InputSupplier<InputStream>> result = new HashMap<>();
 
         resourcePack.findResources(resourceType, namespace, prefix, ((identifier, inputStreamInputSupplier) -> {
-            if (!blacklist.contains(identifier)) {
-                result.put(identifier, inputStreamInputSupplier);
-            }
+            result.put(IdentifierUtil.omit(identifier, prefix + "/", ".json"), inputStreamInputSupplier);
         }));
 
 
@@ -59,9 +37,16 @@ public final class ResourcePackUtil {
 
     public static void saveResourcePack(Path saveLocation) {
         try {
-            RandomizerPlusPlus.RESOURCE_PACK.dump(new ZipOutputStream(
-                    new BufferedOutputStream(Files.newOutputStream(saveLocation)))
-            );
+            var output = Files.newOutputStream(saveLocation);
+            var buffer =  new BufferedOutputStream(output);
+            var zip = new ZipOutputStream(buffer);
+
+            RandomizerPlusPlus.RESOURCE_PACK.dump(zip);
+
+            // cleanup
+            zip.close();
+            buffer.close();
+            output.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

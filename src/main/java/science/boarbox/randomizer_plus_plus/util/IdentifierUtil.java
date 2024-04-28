@@ -4,12 +4,12 @@ import net.minecraft.util.Identifier;
 import science.boarbox.randomizer_plus_plus.RandomizerPlusPlus;
 
 public class IdentifierUtil {
-    public static Identifier create(String path) {
+    public static Identifier createForMod(String path) {
         return new Identifier(RandomizerPlusPlus.MOD_ID, path);
     }
-
-    public static Identifier omitJson(Identifier identifier) {
-        return IdentifierUtil.omitSuffix(identifier, ".json");
+    public static Identifier create(String s) {
+        int nameSpaceLen = s.indexOf(":") + 1;
+        return new Identifier(s.substring(0, nameSpaceLen - 1), s.substring(nameSpaceLen));
     }
 
     public static Identifier omitSuffix(Identifier identifier, String suffix) {
@@ -29,5 +29,9 @@ public class IdentifierUtil {
                 IdentifierUtil.omitPrefix(identifier, prefix),
                 suffix
         );
+    }
+
+    public static Identifier prefixPath(Identifier identifier, String prefix) {
+        return new Identifier(identifier.getNamespace(), prefix + "/" + identifier.getPath());
     }
 }

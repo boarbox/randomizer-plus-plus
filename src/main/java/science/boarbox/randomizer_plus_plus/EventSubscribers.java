@@ -1,20 +1,12 @@
-package science.boarbox.randomizer_plus_plus.event;
+package science.boarbox.randomizer_plus_plus;
 
 import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.integrated.IntegratedServer;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.SaveProperties;
-import net.minecraft.world.WorldEvents;
-import science.boarbox.randomizer_plus_plus.RandomizerPlusPlus;
 
 import java.util.Collection;
 import java.util.Objects;

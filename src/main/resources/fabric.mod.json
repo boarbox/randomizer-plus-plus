@@ -29,6 +29,7 @@
 	"mixins": [
 		"randomizer_plus_plus.mixins.json"
 	],
+	"accessWidener" : "randomizer_plus_plus.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.15.1",
 		"minecraft": "~1.20.4",
