@@ -43,7 +43,7 @@
 		],
 		"mc-publish": {
 			"dependencies": [
-				"brrp_v1@>=1(required){modrinth:brrp}"
+				"brrp_v1@>=1(required){modrinth:brrp,curseforge:better-runtime-resource-pack}"
 			]
 		}
 	}
